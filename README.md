@@ -1,1 +1,1 @@
-# Web-bluetooth-example-Battery-Heart-rate-
+# Battery-level
