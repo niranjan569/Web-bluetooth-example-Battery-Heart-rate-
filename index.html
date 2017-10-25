@@ -317,7 +317,7 @@ function onButtonClick1() {
 	})
 	.then(service => {
 		console.log('Getting Heart rate Characteristic...');
-		return service.getCharacteristic('heart_rate_measurment');
+		return service.getCharacteristic('heart_rate_measurement');
 	})
 	.then(characteristic => {
 		console.log('Starting notifications...');
