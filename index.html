@@ -324,7 +324,7 @@ function onButtonClick1() {
 		characteristic.startNotifications();
 		console.log('Notifications started...');
 		characteristic.addEventListener('characteristicvaluechanged',handleCharacteristicValueChanged);
-		$(".battery").text('Heart_rate_measurment value is ' + '50');
+		$(".battery").text('Heart_rate_measurment value is ' + '0');
 		console.log('Heart_rate_measurment value is ' + '50');
 	})
 	.catch(error => {
