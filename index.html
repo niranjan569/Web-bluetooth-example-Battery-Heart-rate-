@@ -333,8 +333,8 @@ function onButtonClick1() {
 }
 function handleCharacteristicValueChanged(event) {
   var value = parseHeartRate(event.target.value);
-  console.log('Received ' + value);
-  $(".battery").text('Heart_rate_measurment value is ' + value);
+  console.log('Heart_rate_measurment value is ' + value.heartRate+'Energy expended is '+value.energyExpended);
+  document.querySelector('.battery').innerHTML = 'Heart_rate_measurment value is ' + value.heartRate+ '<br>Energy expended is '+value.energyExpended;
 }
 function parseHeartRate(value) {
       value = value.buffer ? value : new DataView(value);
