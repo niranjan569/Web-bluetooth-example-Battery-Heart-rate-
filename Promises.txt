@@ -1,0 +1,121 @@
+Understanding Promises:-
+
+A Promise in short:
+
+"Imagine you are a kid. Your mom promises you that she'll get you a new phone next week."
+
+You don't know if you will get that phone until next week. Your mom can either really buy you a brand new phone, or stand you up and withhold the phone if she is not happy :(.
+
+That is a promise. A promise has 3 states. They are:
+
+Promise is pending: You don't know if you will get that phone until next week.
+Promise is resolved: Your mom really buy you a brand new phone.
+Promise is rejected: You don't get a new phone because your mom is not happy.
+
+
+
+Creating a Promise:-
+Let's convert this to JavaScript.
+
+var isMomHappy = false;
+
+// Promise
+var willIGetNewPhone = new Promise(
+    function (resolve, reject) {
+        if (isMomHappy) {
+            var phone = {
+                brand: 'Samsung',
+                color: 'black'
+            };
+            resolve(phone); // fulfilled
+        } else {
+            var reason = new Error('mom is not happy');
+            reject(reason); // reject
+        }
+
+    }
+);
+
+standard syntax to define a new Promise
+
+// promise syntax look like this
+new Promise(/* executor*/ function (resolve, reject) { ... } );
+
+Consuming Promises:-
+
+Now that we have the promise, let's consume it.
+
+// call our promise
+var askMom = function () {
+    willIGetNewPhone
+        .then(function (fulfilled) {
+            // yay, you got a new phone
+            console.log(fulfilled);
+         // output: { brand: 'Samsung', color: 'black' }
+        })
+        .catch(function (error) {
+            // oops, mom don't buy it
+            console.log(error.message);
+         // output: 'mom is not happy'
+        });
+};
+askMom();
+
+
+
+
+Chaining Promises:-
+
+Promises are chainable.
+
+Let's say, you, the kid, promise your friend that you will show them the new phone when your mom buy you one.
+
+That is another promise. Let's write it!
+
+...
+
+// 2nd promise
+var showOff = function (phone) {
+    return new Promise(
+        function (resolve, reject) {
+            var message = 'Hey friend, I have a new ' +
+                phone.color + ' ' + phone.brand + ' phone';
+
+            resolve(message);
+        }
+    );
+};
+
+Notes:
+
+In this example, you might realize we didn't call the reject. It's optional.
+We can shorten this sample like using Promise.resolve instead.
+// shorten it
+...
+
+// 2nd promise
+var showOff = function (phone) {
+    var message = 'Hey friend, I have a new ' +
+                phone.color + ' ' + phone.brand + ' phone';
+
+    return Promise.resolve(message);
+};
+
+Let's chain the promises. You, the kid can only start the showOff promise after the willIGetNewPhone promise.
+
+...
+
+// call our promise
+var askMom = function () {
+    willIGetNewPhone
+    .then(showOff) // chain it here
+    .then(function (fulfilled) {
+            console.log(fulfilled);
+         // output: 'Hey friend, I have a new black Samsung phone.'
+        })
+        .catch(function (error) {
+            // oops, mom don't buy it
+            console.log(error.message);
+         // output: 'mom is not happy'
+        });
+};
